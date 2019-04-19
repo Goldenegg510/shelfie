@@ -22,9 +22,9 @@ this.props.createProduct(newProduct)
   render(){
     return(
       <div>
-        <input type='text' name='image_url' onChange={this.handleChange} />
-        <input type='text' name='product_name' onChange={this.handleChange} />
-        <input type='number' name='price' onChange={this.handleChange} />
+        <input type='text' placeholder='image url' name='image_url' onChange={this.handleChange} />
+        <input type='text' placeholder='product name' name='product_name' onChange={this.handleChange} />
+        <input type='number' placeholder='price' name='price' onChange={this.handleChange} />
         <button onClick={this.handleCancelClick} >Cancel</button>
         <button onClick={this.handleAddClick} >Add to Inventory</button>
       </div>
