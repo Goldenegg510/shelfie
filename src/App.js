@@ -1,25 +1,41 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Dashboard from './Components/Dashboard/Dashboard'
+import Header from './Components/Header/Header'
+import Product from './Components/Product/Product'
+import Form from './Components/Form/Form'
+import axios from 'axios'
 
 class App extends Component {
+  constructor(){
+    super()
+    this.state={
+      products:[]
+    }
+  }
+  componentDidMount(){
+axios.get('/api/inventory',).then(res => {
+  this.setState({
+    products: res.data
+  })
+}).catch(err => {
+  console.log('we have an error', err)
+})
+}
+createProduct = (newProduct) => {
+axios.post('/api/inventory', newProduct).then(res => {
+  this.setState({
+    products: res.data
+  })
+})
+}
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <Header/>
+      <Dashboard/>
+      <Product/>
+      <Form createProduct={this.createProduct}/>
       </div>
     );
   }
